@@ -15,12 +15,12 @@ class Stats(BaseModel):
 class Pokemon(BaseModel):
     id: int
     name: str
-    height: int = Field(..., description="Total height of the pokemon in inches")
-    weight: float = Field(..., description="Weight of the pokemon in pounds")
+    height: float = Field(..., description="Height of the pokemon in cm")
+    weight: float = Field(..., description="Weight of the pokemon in kg")
     category: str
     types: List[str]
     weaknesses: List[str]
-    abilities: List[str]
+    ability: str
     stats: Stats = Field(..., description="Base stats of th pokemon")
 
 

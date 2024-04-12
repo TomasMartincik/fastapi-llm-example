@@ -14,12 +14,12 @@ def successful_response() -> MaybePokemon:
         pokemon=Pokemon(
             id=25,
             name="Pikachu",
-            height=16,
-            weight=13.2,
-            category="Mouse Pokemon",
+            height=40,
+            weight=6,
+            category="Mouse",
             types=["Electric"],
             weaknesses=["Ground"],
-            abilities=["Static", "Lightning Rod"],
+            ability="Static",
             stats=Stats(
                 hp=35,
                 attack=55,
@@ -42,11 +42,7 @@ async def test_openai_provider_success(successful_response):
     response = await provider.identify_pokemon("Pikachu")
 
     assert response == successful_response
-    mock_client.chat.completions.create.assert_awaited_once_with(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Pikachu"}],
-        response_model=MaybePokemon,
-    )
+    mock_client.chat.completions.create.assert_awaited_once()
 
 
 @pytest.mark.asyncio

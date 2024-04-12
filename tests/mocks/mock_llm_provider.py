@@ -16,12 +16,12 @@ class MockLLMProvider(LLMProvider):
                             pokemon=Pokemon(
                                 id=25,
                                 name="Pikachu",
-                                height=16,
-                                weight=13.2,
-                                category="Mouse Pokemon",
+                                height=40,
+                                weight=6,
+                                category="Mouse",
                                 types=["Electric"],
                                 weaknesses=["Ground"],
-                                abilities=["Static", "Lightning Rod"],
+                                ability="Static",
                                 stats=Stats(
                                     hp=35,
                                     attack=55,

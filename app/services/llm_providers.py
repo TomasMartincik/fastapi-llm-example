@@ -29,7 +29,10 @@ class OpenAIProvider(LLMProvider):
             response = await self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "user", "content": pokemon_description},
+                    {
+                        "role": "user",
+                        "content": f"What are the stats of the following pokemon? Pokemon name or description: {pokemon_description}. Respond with the provided schema.",
+                    },
                 ],
                 response_model=MaybePokemon,
             )

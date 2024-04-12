@@ -62,12 +62,12 @@ async def test_pokemon_success_pikachu(async_client, mock_llm_provider_success):
     assert response.json() == {
         "id": 25,
         "name": "Pikachu",
-        "height": 16,
-        "weight": 13.2,
-        "category": "Mouse Pokemon",
+        "height": 40,
+        "weight": 6,
+        "category": "Mouse",
         "types": ["Electric"],
         "weaknesses": ["Ground"],
-        "abilities": ["Static", "Lightning Rod"],
+        "ability": "Static",
         "stats": {
             "hp": 35,
             "attack": 55,

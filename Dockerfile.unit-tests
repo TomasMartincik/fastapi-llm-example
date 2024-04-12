@@ -32,4 +32,4 @@ COPY ./app /code/app
 COPY ./tests /code/tests
 
 
-CMD ["pytest", "tests/unit/"]
+CMD ["pytest", "-v", "tests/unit/"]
