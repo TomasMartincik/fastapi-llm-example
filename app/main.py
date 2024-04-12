@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.exception_handlers import http_exception_handler
 
 from app.config import setup_logging
+from app.routers.pokemon import router as pokemon_router
 
 
 @asynccontextmanager
@@ -16,6 +17,8 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.add_middleware(CorrelationIdMiddleware)
+
+app.include_router(pokemon_router)
 
 logger = logging.getLogger(__name__)
 
