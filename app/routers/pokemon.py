@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.dependencies import get_llm_provider
 from app.schemas.pokemon import Pokemon
 from app.schemas.query import Query
-from app.services.llm_providers import LLMProvider
+from app.services.llm_providers import LLMProvider, LLMProviderError
 
 router = APIRouter(prefix="/pokemon")
 
@@ -24,12 +24,18 @@ async def identify_pokemon(
 
     try:
         result = await llm_provider.identify_pokemon(query.pokemon_description)
-    except Exception:
-        raise HTTPException(status_code=500, detail="Internal server error")
+    except LLMProviderError:
+        raise HTTPException(
+            status_code=502, detail="An error occurred on the side of the LLM Provider"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"An unexpected error occurred: {e}"
+        )
 
     if not result:
         raise HTTPException(
             status_code=404, detail="Could not identify a pokemon from the description"
         )
 
-    return result
+    return result.pokemon

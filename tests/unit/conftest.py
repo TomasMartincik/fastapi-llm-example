@@ -1,27 +1,10 @@
-from typing import Generator
-
-import pytest
-from fastapi.testclient import TestClient
+import pytest_asyncio
+from httpx import AsyncClient
 
 from app.main import app
-from tests.mocks.mock_llm_provider import MockLLMProvider
 
 
-@pytest.fixture()
-def client() -> Generator:
-    yield TestClient(app)
-
-
-@pytest.fixture
-def mock_llm_provider_success():
-    return MockLLMProvider(behavior="succeed")
-
-
-@pytest.fixture
-def mock_llm_provider_none():
-    return MockLLMProvider(behavior="fail_with_none")
-
-
-@pytest.fixture
-def mock_llm_provider_exception():
-    return MockLLMProvider(behavior="fail_with_exception")
+@pytest_asyncio.fixture
+async def async_client():
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        yield client

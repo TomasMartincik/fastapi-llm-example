@@ -7,6 +7,9 @@ from pythonjsonlogger import jsonlogger
 
 
 class Settings(BaseSettings):
+    llm_provider: str = "openai"
+    openai_api_key: str
+
     model_config = SettingsConfigDict(env_file=".env")
 
 
